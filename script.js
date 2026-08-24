@@ -151,22 +151,103 @@ const fontList = [
     "'Oswald', sans-serif",
     "'Caveat', cursive",
     "Georgia, serif",
-    "'Courier New', monospace"
+    "'Courier New', monospace",
+    "'Poppins', sans-serif",
+    "'Montserrat', sans-serif",
+    "'Inter', sans-serif",
+    "'Open Sans', sans-serif",
+    "'Lato', sans-serif",
+    "'Raleway', sans-serif",
+    "'Nunito', sans-serif",
+    "'Nunito Sans', sans-serif",
+    "'Source Sans 3', sans-serif",
+    "'Work Sans', sans-serif",
+    "'DM Sans', sans-serif",
+    "'Manrope', sans-serif",
+    "'Outfit', sans-serif",
+    "'Plus Jakarta Sans', sans-serif",
+    "'Urbanist', sans-serif",
+    "'Rubik', sans-serif",
+    "'Quicksand', sans-serif",
+    "'Comfortaa', cursive",
+    "'Josefin Sans', sans-serif",
+    "'Barlow', sans-serif",
+    "'Barlow Condensed', sans-serif",
+    "'Archivo', sans-serif",
+    "'Archivo Black', sans-serif",
+    "'Anton', sans-serif",
+    "'League Spartan', sans-serif",
+    "'Righteous', cursive",
+    "'Alfa Slab One', serif",
+    "'Abril Fatface', serif",
+    "'Lobster', cursive",
+    "'Dancing Script', cursive",
+    "'Great Vibes', cursive",
+    "'Satisfy', cursive",
+    "'Sacramento', cursive",
+    "'Kalam', cursive",
+    "'Patrick Hand', cursive",
+    "'Indie Flower', cursive",
+    "'Permanent Marker', cursive",
+    "'Shadows Into Light', cursive",
+    "'Amatic SC', cursive",
+    "'Fira Code', monospace",
+    "'JetBrains Mono', monospace",
+    "'Roboto Mono', monospace",
+    "'IBM Plex Mono', monospace",
+    "'Source Code Pro', monospace",
+    "'Inconsolata', monospace",
+    "'Press Start 2P', monospace",
+    "'VT323', monospace",
+    "'Orbitron', sans-serif",
+    "'Audiowide', sans-serif",
+    "'Exo 2', sans-serif",
+    "'Rajdhani', sans-serif",
+    "'Space Grotesk', sans-serif",
+    "'Syne', sans-serif",
+    "'Bodoni Moda', serif",
+    "'Cormorant Garamond', serif",
+    "'Libre Baskerville', serif",
+    "'Merriweather', serif",
+    "'Lora', serif",
+    "'Crimson Text', serif",
+    "'Cormorant', serif",
+    "'Cinzel', serif",
+    "'DM Serif Display', serif",
+    "'Libre Franklin', sans-serif",
+    "'Cabin', sans-serif",
+    "'Karla', sans-serif",
+    "'Figtree', sans-serif",
+    "'Lexend', sans-serif",
+    "'Mulish', sans-serif",
+    "'Titillium Web', sans-serif",
+    "'Heebo', sans-serif",
+    "'Maven Pro', sans-serif",
+    "'Chakra Petch', sans-serif",
+    "'Play', sans-serif"
 ];
 
 let fontIndex = 0;
 const fontDemo = document.getElementById("fontDemo");
 fontDemo.style.fontFamily = fontList[fontIndex];
 
+const FONT_DELAY_MS = 300; 
+let isFontChanging = false;
+
 function applyFont(index) {
+    isFontChanging = true;
     fontDemo.style.fontFamily = fontList[index];
     console.log(`Font: ${fontList[index]}, index: ${index}`);
+
+    setTimeout(() => {
+        isFontChanging = false;
+    }, FONT_DELAY_MS);
 }
 
 function getKeyboardInput() {
     window.addEventListener("keydown", (event) => {
         if (event.key === "ArrowRight") {
-            if (isTransitioning) return;
+            if (isTransitioning) return; 
             colorIndex = (colorIndex + 1) % colorValues.length;
             applyColor(colorIndex, 1);
         } else if (event.key === "ArrowLeft") {
@@ -174,9 +255,11 @@ function getKeyboardInput() {
             colorIndex = (colorIndex - 1 + colorValues.length) % colorValues.length;
             applyColor(colorIndex, -1);
         } else if (event.key === "ArrowUp") {
+            if (isFontChanging) return;
             fontIndex = (fontIndex + 1) % fontList.length;
             applyFont(fontIndex);
         } else if (event.key === "ArrowDown") {
+            if (isFontChanging) return;
             fontIndex = (fontIndex - 1 + fontList.length) % fontList.length;
             applyFont(fontIndex);
         }
