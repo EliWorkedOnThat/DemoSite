@@ -122,10 +122,6 @@ let incomingLayer = layer2;
 const TRANSITION_MS = 500; 
 let isTransitioning = false;
 
-function changeFont(){
-    
-}
-
 function applyColor(index, direction = 1) {
     isTransitioning = true;
     incomingLayer.style.transition = "none";
@@ -146,16 +142,43 @@ function applyColor(index, direction = 1) {
     }, TRANSITION_MS);
 }
 
+const fontList = [
+    "'Roboto', sans-serif",
+    "'Playfair Display', serif",
+    "'Bebas Neue', sans-serif",
+    "'Pacifico', cursive",
+    "'Space Mono', monospace",
+    "'Oswald', sans-serif",
+    "'Caveat', cursive",
+    "Georgia, serif",
+    "'Courier New', monospace"
+];
+
+let fontIndex = 0;
+const fontDemo = document.getElementById("fontDemo");
+fontDemo.style.fontFamily = fontList[fontIndex];
+
+function applyFont(index) {
+    fontDemo.style.fontFamily = fontList[index];
+    console.log(`Font: ${fontList[index]}, index: ${index}`);
+}
+
 function getKeyboardInput() {
     window.addEventListener("keydown", (event) => {
-        if (isTransitioning) return; 
-
         if (event.key === "ArrowRight") {
+            if (isTransitioning) return;
             colorIndex = (colorIndex + 1) % colorValues.length;
             applyColor(colorIndex, 1);
         } else if (event.key === "ArrowLeft") {
+            if (isTransitioning) return;
             colorIndex = (colorIndex - 1 + colorValues.length) % colorValues.length;
             applyColor(colorIndex, -1);
+        } else if (event.key === "ArrowUp") {
+            fontIndex = (fontIndex + 1) % fontList.length;
+            applyFont(fontIndex);
+        } else if (event.key === "ArrowDown") {
+            fontIndex = (fontIndex - 1 + fontList.length) % fontList.length;
+            applyFont(fontIndex);
         }
     });
 }
