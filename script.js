@@ -244,6 +244,10 @@ function applyFont(index) {
     }, FONT_DELAY_MS);
 }
 
+function changeFontSize(){
+    
+}
+
 function getKeyboardInput() {
     window.addEventListener("keydown", (event) => {
         if (event.key === "ArrowRight") {
