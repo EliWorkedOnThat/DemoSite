@@ -122,6 +122,10 @@ let incomingLayer = layer2;
 const TRANSITION_MS = 500; 
 let isTransitioning = false;
 
+function changeFont(){
+    
+}
+
 function applyColor(index, direction = 1) {
     isTransitioning = true;
     incomingLayer.style.transition = "none";
@@ -146,10 +150,10 @@ function getKeyboardInput() {
     window.addEventListener("keydown", (event) => {
         if (isTransitioning) return; 
 
-        if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+        if (event.key === "ArrowRight") {
             colorIndex = (colorIndex + 1) % colorValues.length;
             applyColor(colorIndex, 1);
-        } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+        } else if (event.key === "ArrowLeft") {
             colorIndex = (colorIndex - 1 + colorValues.length) % colorValues.length;
             applyColor(colorIndex, -1);
         }
