@@ -118,7 +118,6 @@ layer2.style.zIndex = 2;
 layer2.style.transform = "translateX(100%)";
 let activeLayer = layer1;
 let incomingLayer = layer2;
-
 const TRANSITION_MS = 500; 
 let isTransitioning = false;
 
@@ -244,8 +243,11 @@ function applyFont(index) {
     }, FONT_DELAY_MS);
 }
 
-function changeFontSize(){
-    
+let fontSize = 48; 
+
+function changeFontSize(delta) {
+    fontSize += delta;
+    fontDemo.style.fontSize = fontSize + "px";
 }
 
 function getKeyboardInput() {
@@ -266,6 +268,10 @@ function getKeyboardInput() {
             if (isFontChanging) return;
             fontIndex = (fontIndex - 1 + fontList.length) % fontList.length;
             applyFont(fontIndex);
+        } else if (event.key === "PageUp") {
+            changeFontSize(1);
+        } else if (event.key === "PageDown") {
+            changeFontSize(-1);
         }
     });
 }
