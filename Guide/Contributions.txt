@@ -1,0 +1,3 @@
+For anyone interested in contributing to this project, the only rule is to make sure you test your changes and add anything you think would be helpful when starting out and building a website.
+
+Feel free to fix anything you find or improve and upgrade existing features!
