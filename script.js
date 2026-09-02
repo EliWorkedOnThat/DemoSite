@@ -118,7 +118,7 @@ layer2.style.zIndex = 2;
 layer2.style.transform = "translateX(100%)";
 let activeLayer = layer1;
 let incomingLayer = layer2;
-const TRANSITION_MS = 500; 
+const TRANSITION_MS = 500;
 let isTransitioning = false;
 
 function applyColor(index, direction = 1) {
@@ -230,12 +230,20 @@ let fontIndex = 0;
 const fontDemo = document.getElementById("fontDemo");
 fontDemo.style.fontFamily = fontList[fontIndex];
 
-const FONT_DELAY_MS = 300; 
+const FONT_DELAY_MS = 300;
 let isFontChanging = false;
+let fontSize = 48;
+
+const infoDisplay = document.getElementById("info");
+
+function updateInfo() {
+    infoDisplay.textContent = `${fontList[fontIndex]} — ${fontSize}px`;
+}
 
 function applyFont(index) {
     isFontChanging = true;
     fontDemo.style.fontFamily = fontList[index];
+    updateInfo();
     console.log(`Font: ${fontList[index]}, index: ${index}`);
 
     setTimeout(() => {
@@ -243,17 +251,16 @@ function applyFont(index) {
     }, FONT_DELAY_MS);
 }
 
-let fontSize = 48; 
-
 function changeFontSize(delta) {
     fontSize += delta;
     fontDemo.style.fontSize = fontSize + "px";
+    updateInfo();
 }
 
 function getKeyboardInput() {
     window.addEventListener("keydown", (event) => {
         if (event.key === "ArrowRight") {
-            if (isTransitioning) return; 
+            if (isTransitioning) return;
             colorIndex = (colorIndex + 1) % colorValues.length;
             applyColor(colorIndex, 1);
         } else if (event.key === "ArrowLeft") {
@@ -277,3 +284,4 @@ function getKeyboardInput() {
 }
 
 getKeyboardInput();
+updateInfo();
